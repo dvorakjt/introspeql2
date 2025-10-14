@@ -3,7 +3,7 @@ import type { Client } from "pg";
 
 export async function readColumnData(
   client: Client,
-  tableId: number
+  tableOID: number
 ): Promise<ColumnData[]> {
   const result = await client.query(
     `
@@ -50,7 +50,7 @@ INNER JOIN pg_catalog.pg_attribute AS a ON c.oid = a.attrelid
 INNER JOIN pg_catalog.pg_type AS t ON a.atttypid = t.oid
 WHERE c.oid = $1
 AND a.attnum >= 1;`,
-    [tableId]
+    [tableOID]
   );
 
   const rows = result.rows.map((r) => r.jsonb_build_object);
