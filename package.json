@@ -1,0 +1,26 @@
+{
+  "name": "introspeql2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest --no-watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@types/node": "^24.7.0",
+    "@types/pg": "^8.15.5",
+    "pgmock": "^1.0.3",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "pg": "^8.16.3",
+    "zod": "^4.1.12"
+  }
+}
