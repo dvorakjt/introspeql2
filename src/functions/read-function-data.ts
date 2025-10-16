@@ -1,4 +1,6 @@
 import { functionDataSchema, type FunctionData } from "./function-data";
+import { shouldIncludeOverload } from "./should-include-overload";
+import { shouldIncludeFunction } from "./should-include-function";
 import type { Client } from "pg";
 import type { ParsedConfig } from "../config";
 
@@ -84,9 +86,20 @@ GROUP BY (p1.proname, n1.nspname);
 
   const result = await client.query(query, parameters);
 
-  const functionData = functionDataSchema.array().parse(result.rows);
-
-  // actually need to filter it here
+  const functionData = functionDataSchema
+    .array()
+    .parse(result.rows)
+    .map((fd) => {
+      return {
+        ...fd,
+        overloads: fd.overloads.filter(({ comment }) => {
+          return shouldIncludeOverload(comment, config);
+        }),
+      };
+    })
+    .filter((fd) => {
+      return shouldIncludeFunction(fd, config);
+    });
 
   return functionData;
 }

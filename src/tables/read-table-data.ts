@@ -1,5 +1,5 @@
 import { tableDataSchema, type TableData } from "./table-data";
-import { shouldIncludeEntity } from "../shared/should-include-entity";
+import { shouldIncludeTable } from "./should-include-table";
 import type { Client } from "pg";
 import type { ParsedConfig } from "../config";
 
@@ -29,7 +29,7 @@ WHERE c.relkind = 'r' AND n.nspname IN (${schemaPlaceholders});
     .array()
     .parse(result.rows)
     .filter(({ name, schema, comment }) =>
-      shouldIncludeEntity({
+      shouldIncludeTable({
         name,
         schema,
         comment,

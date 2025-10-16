@@ -8,7 +8,7 @@ import {
   type ParsedConfig,
 } from "../../../config";
 import { faker } from "@faker-js/faker";
-import { Directives } from "../../../shared/directives";
+import { Directives } from "../../../shared";
 
 describe(
   "readTableData",

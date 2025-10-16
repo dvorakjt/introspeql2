@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
-import { shouldIncludeEntity } from "../../../shared/should-include-entity";
-import { Directives } from "../../../shared/directives";
+import { shouldIncludeTable } from "../../../tables/should-include-table";
+import { Directives } from "../../../shared";
 
-describe("shouldIncludeEntity", () => {
+describe("shouldIncludeTable", () => {
   test("if mode is inclusive, it returns true.", () => {
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: "",
       schema: "",
       comment: null,
@@ -16,7 +16,7 @@ describe("shouldIncludeEntity", () => {
   });
 
   test("if mode is exclusive, it returns false.", () => {
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: "",
       schema: "",
       comment: null,
@@ -28,7 +28,7 @@ describe("shouldIncludeEntity", () => {
   });
 
   test("if mode is inclusive, but the comment includes the exclude directive, it returns false.", () => {
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: "",
       schema: "",
       comment: `${Directives.Exclude}`,
@@ -43,7 +43,7 @@ describe("shouldIncludeEntity", () => {
     const schemaName = "public";
     const tableName = "users";
 
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: tableName,
       schema: schemaName,
       comment: null,
@@ -60,7 +60,7 @@ describe("shouldIncludeEntity", () => {
   });
 
   test("if mode is exclusive, but the comment includes the include directive, it returns true.", () => {
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: "",
       schema: "",
       comment: `${Directives.Include}`,
@@ -75,7 +75,7 @@ describe("shouldIncludeEntity", () => {
     const schemaName = "public";
     const tableName = "users";
 
-    const includeEntity = shouldIncludeEntity({
+    const includeEntity = shouldIncludeTable({
       name: tableName,
       schema: schemaName,
       comment: null,
