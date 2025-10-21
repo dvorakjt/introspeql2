@@ -93,12 +93,12 @@ GROUP BY (p1.proname, n1.nspname);
       return {
         ...fd,
         overloads: fd.overloads.filter(({ comment }) => {
-          return shouldIncludeOverload(comment, config);
+          return shouldIncludeOverload(fd.schema, fd.name, comment, config);
         }),
       };
     })
     .filter((fd) => {
-      return shouldIncludeFunction(fd, config);
+      return shouldIncludeFunction(fd);
     });
 
   return functionData;
